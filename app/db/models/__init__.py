@@ -3,6 +3,7 @@ from datetime import datetime
 from werkzeug.security import check_password_hash, generate_password_hash
 from app.db import db
 from flask_login import UserMixin
+from hashlib import md5
 
 
 class User(UserMixin, db.Model):
@@ -12,10 +13,14 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(300), nullable=False, unique=True)
     about = db.Column(db.String(300), nullable=True, unique=False)
+    hobbies = db.Column(db.String(300), nullable=True, unique=False)
+    education = db.Column(db.String(300), nullable=True, unique=False)
+    skills = db.Column(db.String(300), nullable=True, unique=False)
     authenticated = db.Column(db.Boolean, default=False)
     registered_on = db.Column('registered_on', db.DateTime)
     active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
     is_admin = db.Column('is_admin', db.Boolean(), nullable=False, server_default='0')
+    last_seen = db.Column(db.DateTime)
 
     # `roles` and `groups` are reserved words that *must* be defined
     # on the `User` model to use group- or role-based authorization.
@@ -45,3 +50,11 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return '<User %r>' % self.email
+
+    def avatar(self, size):
+        digest = md5(self.email.lower().encode('utf-8')).hexdigest()
+        return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(
+            digest, size)
+
+    def last_seen(self, last_seen):
+        return datetime.utcnow()
