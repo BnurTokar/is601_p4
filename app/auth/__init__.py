@@ -72,8 +72,8 @@ def login():
 @login_required
 def logout():
     """Logout the current user."""
-    log = logging.getLogger("eachRequestResponse")
-    log.info("user logout()")
+    #log = logging.getLogger("eachRequestResponse")
+    #log.info("user logout()")
     user = current_user
     user.active = 0
     user.authenticated = False
@@ -88,15 +88,15 @@ def logout():
 @auth.route('/dashboard')
 @login_required
 def dashboard():
-    log = logging.getLogger("eachRequestResponse")
-    log.info("user dashboard")
+    #log = logging.getLogger("eachRequestResponse")
+    #log.info("user dashboard")
     return render_template('dashboard.html')
 
 
 @auth.route('/profile', methods=['POST', 'GET'])
 def edit_profile():
-    log = logging.getLogger("eachRequestResponse")
-    log.info("edit profile")
+    #log = logging.getLogger("eachRequestResponse")
+    #log.info("edit profile")
     updated_user = User.query.get(current_user.get_id())
     form = profile_form(obj=updated_user)
     if form.validate_on_submit():
@@ -116,8 +116,8 @@ def edit_profile():
 
 @auth.route('/account', methods=['POST', 'GET'])
 def edit_account():
-    log = logging.getLogger("eachRequestResponse")
-    log.info("edit account")
+    #log = logging.getLogger("eachRequestResponse")
+    #log.info("edit account")
     updated_user = User.query.get(current_user.get_id())
     email_updated = False
     password_updated = False
@@ -128,10 +128,10 @@ def edit_account():
         updated_user.email = request.form.get('email')
         updated_user.password = request.form.get('password')
         if email != updated_user.email:
-            log.info('email updated!')
+            #log.info('email updated!')
             email_updated = True
         if password != updated_user.password:
-            log.info('password updated!')
+            #log.info('password updated!')
             password_updated = True
         db.session.add(updated_user)
         db.session.commit()
@@ -155,8 +155,8 @@ def edit_account():
 @login_required
 @admin_required
 def browse_users():
-    log = logging.getLogger("eachRequestResponse")
-    log.info("browse user")
+    #log = logging.getLogger("eachRequestResponse")
+    #log.info("browse user")
     user_information = User.query.all()
     headers = [('id', 'User ID'),('email', 'Email'), ('registered_on', 'Registered On'), ('active', 'Active Status'), ('skills', 'Skills')]
     add_url = url_for('auth.add_user')
@@ -173,8 +173,8 @@ def browse_users():
 @auth.route('/users/<int:user_id>')
 @login_required
 def retrieve_user(user_id):
-    log = logging.getLogger("eachRequestResponse")
-    log.info("Retrieve user")
+    #log = logging.getLogger("eachRequestResponse")
+    #log.info("Retrieve user")
     user = User.query.get(user_id)
     return render_template('profile_view.html', user=user)
 
@@ -182,8 +182,8 @@ def retrieve_user(user_id):
 @auth.route('/users/<int:user_id>/edit', methods=['POST', 'GET'])
 @login_required
 def edit_user(user_id):
-    log = logging.getLogger("eachRequestResponse")
-    log.info("Edit user")
+    #log = logging.getLogger("eachRequestResponse")
+    #log.info("Edit user")
     edit_user = User.query.get(user_id)
     about_updated = False
     hobbies_updated = False
@@ -201,16 +201,16 @@ def edit_user(user_id):
         edit_user.skills = request.form.get('skills')
         edit_user.is_admin = int(form.is_admin.data)
         if about != edit_user.about:
-            log.info('Admin Updated User About Info!')
+            #log.info('Admin Updated User About Info!')
             about_updated = True
         if hobbies != edit_user.hobbies:
-            log.info('Admin Updated User Hobbies Info!')
+            #log.info('Admin Updated User Hobbies Info!')
             hobbies_updated = True
         if education != edit_user.education:
-            log.info('Admin Updated User Education Info!')
+            #log.info('Admin Updated User Education Info!')
             education_updated = True
         if skills != edit_user.skills:
-            log.info('Admin Updated User Skills Info!')
+            #log.info('Admin Updated User Skills Info!')
             skills_updated = True
         db.session.add(edit_user)
         db.session.commit()
@@ -226,8 +226,8 @@ def edit_user(user_id):
 @auth.route('/users/new', methods=['POST', 'GET'])
 @login_required
 def add_user():
-    log = logging.getLogger("eachRequestResponse")
-    log.info("add user")
+    #log = logging.getLogger("eachRequestResponse")
+    #log.info("add user")
     form = register_form()
     if form.validate_on_submit():
         email = request.form.get('email')
@@ -250,8 +250,8 @@ def add_user():
 @auth.route('/users/<int:user_id>/delete', methods=['POST'])
 @login_required
 def delete_user(user_id):
-    log = logging.getLogger("eachRequestResponse")
-    log.info("delete user")
+    #log = logging.getLogger("eachRequestResponse")
+    #log.info("delete user")
     deleting_user = User.query.get(user_id)
     if deleting_user.id == current_user.id:
         flash("You Are Not Allowed to Delete Yourself!")
