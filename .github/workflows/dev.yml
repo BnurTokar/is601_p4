@@ -29,5 +29,5 @@ jobs:
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "beyzanur-p4-dev" #Must be unique in Heroku
-            heroku_email: "bt268@njit.edu"
+          heroku_email: "bt268@njit.edu"
           usedocker: true
