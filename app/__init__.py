@@ -15,7 +15,8 @@ from app.auth import auth
 from app.auth import auth
 from app.cli import create_database
 from app.context_processors import utility_text_processors
-from app.db import db
+from app.db import db,database
+
 from app.db.models import User
 from app.exceptions import http_exceptions
 from app.simple_pages import simple_pages
@@ -52,6 +53,7 @@ def create_app():
     bootstrap = Bootstrap5(app)
     app.register_blueprint(simple_pages)
     app.register_blueprint(auth)
+    app.register_blueprint(database)
     app.context_processor(utility_text_processors)
     app.config['BOOTSTRAP_BOOTSWATCH_THEME'] = 'Simplex'
     app.register_error_handler(404, page_not_found)
