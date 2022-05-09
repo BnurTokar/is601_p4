@@ -1,0 +1,12 @@
+INFO : opened about page method: GET , route: /about , [2022-05-09 18:53:41,132] , request address: 172.29.0.1
+INFO : opened welcome page method: GET , route: /welcome , [2022-05-09 18:53:41,547] , request address: 172.29.0.1
+INFO : opened about page method: GET , route: /about , [2022-05-09 18:55:48,227] , request address: 172.29.0.1
+INFO : opened welcome page method: GET , route: /welcome , [2022-05-09 18:55:49,348] , request address: 172.29.0.1
+INFO : opened welcome page method: GET , route: /welcome , [2022-05-09 18:57:13,210] , request address: 172.29.0.1
+INFO : opened about page method: GET , route: /about , [2022-05-09 18:57:13,359] , request address: 172.29.0.1
+INFO : opened welcome page method: GET , route: /welcome , [2022-05-09 18:57:15,103] , request address: 172.29.0.1
+INFO : opened welcome page method: GET , route: /welcome , [2022-05-09 18:57:15,337] , request address: 172.29.0.1
+INFO : opened about page method: GET , route: /about , [2022-05-09 18:57:39,983] , request address: 172.29.0.1
+INFO : opened welcome page method: GET , route: /welcome , [2022-05-09 18:57:40,524] , request address: 172.29.0.1
+INFO : opened about page method: GET , route: /about , [2022-05-09 19:04:32,781] , request address: 172.29.0.1
+INFO : opened welcome page method: GET , route: /welcome , [2022-05-09 19:04:33,187] , request address: 172.29.0.1

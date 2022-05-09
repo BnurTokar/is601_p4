@@ -1,6 +1,6 @@
 import csv
 import os
-
+import logging
 
 from flask import Blueprint, render_template, abort, url_for, flash
 from flask_login import current_user, login_required
@@ -36,9 +36,8 @@ def transactions_upload():
 
     form = csv_upload()
     if form.validate_on_submit():
-        #log = logging.getLogger("myApp")
-        #log1 = logging.getLogger("uploadCsv")
-        #log1.info("UPLOADED A NEW FILE")
+        upload_log = logging.getLogger("uploadCsv")
+        upload_log.info("Uploaded a new file about transaction!")
         filename = secure_filename(form.file.data.filename)
         filepath = os.path.join(config.Config.UPLOAD_FOLDER, filename)
         form.file.data.save(filepath)
@@ -49,7 +48,7 @@ def transactions_upload():
                 balance = calc_obj.add(int(row["\ufeffAMOUNT"]))
                 transaction_list.append(Transaction(row["\ufeffAMOUNT"],row['TYPE'], balance))
 
-
+        upload_log.info("Current Balance:" + str(calc_obj.get_result()))
         current_user.transactions = transaction_list
         db.session.commit()
         flash('You Uploaded Transactions Successfully!', 'success')
