@@ -13,6 +13,7 @@ from flask_wtf.csrf import CSRFProtect
 
 from app.auth import auth
 from app.auth import auth
+from app.transactions import transactions
 from app.cli import create_database
 from app.context_processors import utility_text_processors
 from app.db import db,database
@@ -44,6 +45,7 @@ class RequestFormatter(logging.Formatter):
 
 def create_app():
     """Create and configure an instance of the Flask application."""
+
     app = Flask(__name__)
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     app.secret_key = 'This is an INSECURE secret!! DO NOT use this in production!!'
@@ -55,6 +57,7 @@ def create_app():
     app.register_blueprint(auth)
     app.register_blueprint(database)
     app.context_processor(utility_text_processors)
+    app.register_blueprint(transactions)
     app.config['BOOTSTRAP_BOOTSWATCH_THEME'] = 'Simplex'
     app.register_error_handler(404, page_not_found)
     # app.add_url_rule("/", endpoint="index")
@@ -62,6 +65,7 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///" + os.path.join(BASE_DIR, '..', DB_DIR, "db.sqlite")
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.init_app(app)
+
     # add command function to cli commands
     app.cli.add_command(create_database)
 
@@ -70,6 +74,13 @@ def create_app():
 
     # get root directory of project
     root = os.path.dirname(os.path.abspath(__file__))
+
+    # set the name of the transaction uploads folder
+    upload_dir = os.path.join(root, 'uploads')
+    # make a directory if it doesn't exist
+    if not os.path.exists(upload_dir):
+        os.mkdir(upload_dir)
+
     # set the name of the apps log folder to logs
     logdir = os.path.join(root, 'logs')
     # make a directory if it doesn't exist
