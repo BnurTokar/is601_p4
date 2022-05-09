@@ -26,13 +26,3 @@ def about():
     except TemplateNotFound:
         log.info("about page 404")
         abort(404)
-
-@simple_pages.route('/welcome')
-def welcome():
-    try:
-        log = logging.getLogger("eachRequestResponse")
-        log.info("opened welcome page")
-        return render_template('welcome.html')
-    except TemplateNotFound:
-        log.info("welcome page 404")
-        abort(404)
