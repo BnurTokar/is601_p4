@@ -3,8 +3,19 @@
     <div class="row">
         <article class="col-8 lh-lg fs-5">
 
-            <h1>Home Page</h1>
-            {{ lipsum (n=5, html=True, min=20, max=100) }}
+            <h1>Home</h1>
+            <p>
+                Welcome to Beyzanur Tokar's Transaction Website. It is my final project of IS601 class.
+            </p>
+            <p>
+                This website allows a user to register, login, and upload the CSV file included with
+                the project repository. The user dashboard must display a table of transactions and it must display the
+                current balance of the account based on the transactions. The starting balance of the account is 0 and
+                is
+                determined by adding and subtracting debits and credits to the account that are identified as such in
+                the
+                CSV file.
+            </p>
         </article>
         {% if current_user.is_authenticated == false %}
             <aside class="col-4">
