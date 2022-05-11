@@ -29,3 +29,7 @@ def test_transaction_upload_file(application,client):
         db.session.delete(user)
 
 
+def test_denying_transaction_upload_file(application,client):
+    response = client.post('/transactions/upload', data="/home/myuser/tests/sample.csv", follow_redirects = True)
+    assert response.status_code == 400
+
