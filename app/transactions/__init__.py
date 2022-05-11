@@ -31,6 +31,7 @@ def transactions_browse(page):
         abort(404)
 
 @transactions.route('/transactions/upload', methods=['POST', 'GET'])
+@login_required
 def transactions_upload():
 
     form = csv_upload()
