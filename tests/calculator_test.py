@@ -21,3 +21,13 @@ def test_calculator_subtraction():
     assert  subtract_result == -80
     subtract_result = calculator_obj.subtract(-20)
     assert  subtract_result == -60
+
+
+def test_calculator_multiplication():
+    calculator_obj = Calculator()
+    multiplication_result = calculator_obj.multiply(2, 5)
+    assert  multiplication_result == 10
+    multiplication_result = calculator_obj.multiply(multiplication_result, 20)
+    assert  multiplication_result == 200
+    multiplication_result = calculator_obj.multiply(multiplication_result, 0)
+    assert multiplication_result == 0
