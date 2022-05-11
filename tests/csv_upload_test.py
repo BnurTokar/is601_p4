@@ -19,7 +19,7 @@ def test_transaction_upload_file(application,client):
         #assert filepath == "/home/myuser/tests/sample.csv"
         assert client.get('/transactions/upload').status_code== 302
 
-
+"""
         with open(filepath, 'rb') as file:
             response = client.post('/transactions/upload', data=filename, follow_redirects = True)
                 #response = client.get('/transactions/upload')
@@ -32,3 +32,4 @@ def test_denying_transaction_upload_file(application,client):
     response = client.get('/transactions/upload')
     assert response.status_code == 302
 
+"""
