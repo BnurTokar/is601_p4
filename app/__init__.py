@@ -66,6 +66,7 @@ def create_app():
     DB_DIR = os.getenv('DB_DIR','database')
     app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///" + os.path.join(BASE_DIR, '..', DB_DIR, "db.sqlite")
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    app.config['WTF_CSRF_METHODS'] = []
     db.init_app(app)
 
     # add command function to cli commands
