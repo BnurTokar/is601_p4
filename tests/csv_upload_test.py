@@ -20,13 +20,11 @@ def test_transaction_upload_file(application,client):
         assert client.get('/transactions/upload').status_code== 302
 
 
-        with application.test_client(user) as client:
-            with open(filepath, 'rb') as file:
-                response = client.post('/transactions/upload', data=filename, follow_redirects = True)
+        with open(filepath, 'rb') as file:
+            response = client.post('/transactions/upload', data=filename, follow_redirects = True)
                 #response = client.get('/transactions/upload')
 
-            assert response.status_code == 200
-        db.session.delete(user)
+        assert response.status_code == 200
 
 
 def test_denying_transaction_upload_file(application,client):
