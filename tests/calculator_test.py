@@ -13,3 +13,11 @@ def test_calculator_addition():
     assert  addition == 1
     addition = calculator_obj.add(16)
     assert  addition == 17
+
+
+def test_calculator_subtraction():
+    calculator_obj = Calculator()
+    subtract_result = calculator_obj.subtract(80)
+    assert  subtract_result == -80
+    subtract_result = calculator_obj.subtract(-20)
+    assert  subtract_result == -60
