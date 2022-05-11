@@ -12,6 +12,16 @@ class Calculator:
         self.result = self.result - value_1
         return self.result
 
+    def multiply(self, value_1, value_2):
+        self.result = value_1 * value_2
+        return self.result
+
+    def divide(self, value_1, value_2):
+        if value_2 == 0:
+            return "You cannot divide by zero"
+        self.result = value_1 / value_2
+        return self.result
+
     def get_result(self):
         """ This is the get result method"""
         return self.result

@@ -18,8 +18,8 @@ transactions = Blueprint('transactions', __name__,
 
 calc_obj = Calculator()
 
+@transactions.route('/transactions', methods=['GET'], defaults={"page": 1})
 @transactions.route('/transactions/<int:page>', methods=['GET'], defaults={"page": 1})
-@login_required
 def transactions_browse(page):
     page = page
     per_page = 1000
@@ -31,7 +31,6 @@ def transactions_browse(page):
         abort(404)
 
 @transactions.route('/transactions/upload', methods=['POST', 'GET'])
-@login_required
 def transactions_upload():
 
     form = csv_upload()

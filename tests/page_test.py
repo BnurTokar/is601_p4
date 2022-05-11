@@ -1,0 +1,33 @@
+#simple pages accessing status code
+def test_main_menu_links(client):
+    response =client.get('/')
+    assert response.status_code == 200
+    assert b'href="/about"' in response.data
+    assert b'href="/login"' in response.data
+    assert b'href="/register"' in response.data
+
+def test_auth_pages(client):
+    """This makes the index page"""
+    response = client.get("/dashboard")
+    assert response.status_code == 302
+    response = client.get("/register")
+    assert response.status_code == 200
+    response = client.get("/login")
+    assert response.status_code == 200
+
+def test_request_index(client):
+    """This makes the index page"""
+    response = client.get("/")
+    assert response.status_code == 200
+    assert b"Home" in response.data
+
+def test_request_about(client):
+    """This makes the index page"""
+    response = client.get("/about")
+    assert response.status_code == 200
+    assert b"About" in response.data
+
+def test_request_page_not_found(client):
+    """This makes the index page"""
+    response = client.get("/page5")
+    assert response.status_code == 404
