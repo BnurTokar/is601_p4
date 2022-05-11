@@ -16,7 +16,7 @@ def test_transaction_upload_file(application,client):
         filename = 'sample.csv'
         filepath = os.path.join(root, filename)
 
-        assert filepath == "/home/myuser/tests/sample.csv"
+        #assert filepath == "/home/myuser/tests/sample.csv"
         assert client.get('/transactions/upload').status_code== 200
 
 
@@ -30,6 +30,6 @@ def test_transaction_upload_file(application,client):
 
 
 def test_denying_transaction_upload_file(application,client):
-    response = client.post('/transactions/upload', data="/home/myuser/tests/sample.csv", follow_redirects = True)
+    response = client.post('/transactions/upload', data="sample.csv", follow_redirects = True)
     assert response.status_code == 400
 
