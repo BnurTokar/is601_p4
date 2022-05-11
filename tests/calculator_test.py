@@ -31,3 +31,13 @@ def test_calculator_multiplication():
     assert  multiplication_result == 200
     multiplication_result = calculator_obj.multiply(multiplication_result, 0)
     assert multiplication_result == 0
+
+
+def test_calculator_division():
+    calculator_obj = Calculator()
+    division_result = calculator_obj.divide(500, 2)
+    assert  division_result == 250
+    division_result = calculator_obj.divide(division_result, 10)
+    assert  division_result == 25
+    division_result = calculator_obj.divide(division_result, 25)
+    assert division_result == 1
