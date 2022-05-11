@@ -24,6 +24,7 @@ def test_for_accessing_dashboard(application,client):
         db.session.delete(user)
         assert db.session.query(User).count() == 0
 
+
 def test_for_denying_dashboard(application,client):
     assert db.session.query(User).count() == 0
 
@@ -33,3 +34,21 @@ def test_for_denying_dashboard(application,client):
 
     assert response_dashboard.status_code == 302
 
+
+def test_user_management_access(application,client):
+    with application.app_context():
+        assert db.session.query(User).count() == 0
+
+        user = User('beyzatest@test.com', 'testtest')
+        db.session.add(user)
+        assert user.email == 'beyzatest@test.com'
+
+        db.session.commit()
+        assert user.get_id() == 1
+
+        user.is_admin = True
+        response = client.get('/users')
+        assert response.status_code == 302
+
+        assert db.session.query(User).count() == 1
+        db.session.delete(user)
