@@ -15,3 +15,12 @@ def test_log_files_paths():
     filepath_upload = os.path.join(root, filename_upload)
     assert filepath_upload == '/home/myuser/app/upload_transaction.log'
 
+
+def test_each_request_response_log_file():
+
+    absolute_folder = config.Config.LOG_DIR_TEST
+    absolute_file = os.path.join(absolute_folder, filename_each)
+
+    assert absolute_file == "/home/myuser/app/logs/each_request_response.log"
+    assert os.path.isfile(absolute_file)
+
