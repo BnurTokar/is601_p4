@@ -17,13 +17,13 @@ def test_transaction_upload_file(application,client):
         filepath = os.path.join(root, filename)
 
         #assert filepath == "/home/myuser/tests/sample.csv"
-        assert client.get('/transactions/upload').status_code== 200
+        assert client.get('/transactions/upload').status_code== 302
 
 
         with application.test_client(user) as client:
             with open(filepath, 'rb') as file:
                 response = client.post('/transactions/upload', data=filename, follow_redirects = True)
-                response = client.get('/transactions/upload')
+                #response = client.get('/transactions/upload')
 
             assert response.status_code == 200
         db.session.delete(user)
@@ -31,5 +31,6 @@ def test_transaction_upload_file(application,client):
 
 def test_denying_transaction_upload_file(application,client):
     response = client.post('/transactions/upload', data="sample.csv", follow_redirects = True)
-    assert response.status_code == 400
+    response = client.get('/transactions/upload')
+    assert response.status_code == 302
 
