@@ -24,4 +24,12 @@ def test_for_accessing_dashboard(application,client):
         db.session.delete(user)
         assert db.session.query(User).count() == 0
 
+def test_for_denying_dashboard(application,client):
+    assert db.session.query(User).count() == 0
+
+    with application.test_client() as client:
+        client.post('/login', data=dict(email='testuser@test.com',password= 'testtest'), follow_redirects=True)
+        response_dashboard= client.get('/dashboard')
+
+    assert response_dashboard.status_code == 302
 
