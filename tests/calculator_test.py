@@ -41,3 +41,10 @@ def test_calculator_division():
     assert  division_result == 25
     division_result = calculator_obj.divide(division_result, 25)
     assert division_result == 1
+
+
+def test_calculator_zero_division_exception():
+    calculator_obj = Calculator()
+    division_result = calculator_obj.divide(20, 0)
+    assert  division_result == "You cannot divide by zero"
+
