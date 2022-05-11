@@ -67,3 +67,18 @@ def test_edit_user_access(application,client):
         response = client.get('/users/1/edit')
         assert response.status_code == 302
         db.session.delete(user)
+
+
+def test_profile_page_access(application,client):
+    with application.app_context():
+        user = User('beyzatest@test.com', 'testtest')
+        db.session.add(user)
+        assert user.email == 'beyzatest@test.com'
+
+        db.session.commit()
+        assert user.get_id() == 1
+
+        user.is_admin = True
+        response = client.get('/users/1')
+        assert response.status_code == 302
+        db.session.delete(user)
